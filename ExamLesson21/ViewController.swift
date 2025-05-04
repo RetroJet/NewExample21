@@ -10,9 +10,7 @@ import UIKit
 class ViewController: UIViewController {
     private let shadowView = ShadowView(ImageName: ShadowViewType.cat.rawValue)
     private let stackView = UIStackView()
-    private let textLabel = LabelView(
-        textName: "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit..."
-    )
+    private let textLabel = LabelView(textName: TextData.mainText)
     
     override func viewDidLoad() {
         super.viewDidLoad()
