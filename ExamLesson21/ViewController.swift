@@ -11,9 +11,14 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupView()
 
     }
-
-
 }
 
+//MARK: - Setup View
+extension ViewController {
+    func setupView() {
+        view.backgroundColor = .white
+    }
+}
