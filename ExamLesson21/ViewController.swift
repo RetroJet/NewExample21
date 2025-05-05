@@ -9,14 +9,16 @@ import UIKit
 
 class ViewController: UIViewController {
     private let shadowView = ShadowView(ImageName: ShadowViewType.cat.rawValue)
-    private let stackView = UIStackView()
     private let textLabel = LabelView(textName: TextData.mainText)
+    private let stackViewLabel = UIStackView()
+    private let stackViewButton = UIStackView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupBackground()
+        view.addSubview(stackViewLabel)
         setupStackView()
-        view.addSubview(stackView)
+
         
         setupLayout()
     }
@@ -35,27 +37,34 @@ extension ViewController {
     }
     
     private func setupStackView() {
-        stackView.axis = .vertical
-        stackView.distribution = .equalSpacing
-        stackView.alignment = .center
-        stackView.spacing = 20
+        stackViewLabel.axis = .vertical
+        stackViewLabel.distribution = .equalSpacing
+        stackViewLabel.alignment = .center
+        stackViewLabel.spacing = 20
         
-        stackView.addArrangedSubview(shadowView)
-        stackView.addArrangedSubview(textLabel)
+        stackViewButton.axis = .vertical
+        stackViewButton.distribution = .equalSpacing
+        stackViewButton.alignment = .center
+        stackViewButton.spacing = 20
+        
+        stackViewLabel.addArrangedSubview(shadowView)
+        stackViewLabel.addArrangedSubview(textLabel)
     }
+    
 }
 
 private extension ViewController {
     func setupLayout() {
-        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackViewLabel.translatesAutoresizingMaskIntoConstraints = false
+        stackViewButton.translatesAutoresizingMaskIntoConstraints = false
         shadowView.translatesAutoresizingMaskIntoConstraints = false
-
+        
         NSLayoutConstraint.activate([
-            stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            stackView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.7),
-
-            shadowView.topAnchor.constraint(equalTo: stackView.topAnchor, constant: 70),
+            stackViewLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            stackViewLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            stackViewLabel.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.7),
+            
+            shadowView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 70),
             shadowView.heightAnchor.constraint(equalToConstant: 200),
             shadowView.widthAnchor.constraint(equalToConstant: 200),
             
@@ -63,3 +72,4 @@ private extension ViewController {
         ])
     }
 }
+
