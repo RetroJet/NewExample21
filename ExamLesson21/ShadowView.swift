@@ -10,10 +10,6 @@ import UIKit
 class ShadowView: UIView {
     private let imageView = UIImageView()
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
-    }
-    
     init(ImageName: String) {
         super.init(frame: .zero)
         setupView()
