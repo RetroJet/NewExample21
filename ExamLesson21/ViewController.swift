@@ -12,13 +12,33 @@ class ViewController: UIViewController {
     private let textLabel = LabelView(textName: TextData.mainText)
     private let stackViewLabel = UIStackView()
     private let stackViewButton = UIStackView()
+    private let lastButton = CustomButton(
+        titleNormal: "Last",
+        titleColor: .white,
+        colorButton: .systemTeal,
+        shouldAddShadow: true
+    )
+    private let nextButton = CustomButton(
+        titleNormal: "Next",
+        titleColor: .black,
+        colorButton: .white,
+        shouldAddShadow: true
+    )
+    private let firstButton = CustomButton(
+        titleNormal: "First",
+        titleColor: .white,
+        colorButton: .systemPink
+    )
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupBackground()
         view.addSubview(stackViewLabel)
+        view.addSubview(stackViewButton)
+        view.addSubview(firstButton)
         setupStackView()
-
+        
+        
         
         setupLayout()
     }
@@ -38,17 +58,20 @@ extension ViewController {
     
     private func setupStackView() {
         stackViewLabel.axis = .vertical
-        stackViewLabel.distribution = .equalSpacing
+        stackViewLabel.distribution = .fill
         stackViewLabel.alignment = .center
-        stackViewLabel.spacing = 20
+        stackViewLabel.spacing = 40
         
-        stackViewButton.axis = .vertical
-        stackViewButton.distribution = .equalSpacing
-        stackViewButton.alignment = .center
-        stackViewButton.spacing = 20
+        stackViewButton.axis = .horizontal
+        stackViewButton.distribution = .fillEqually
+        stackViewButton.alignment = .fill
+        stackViewButton.spacing = 60
         
         stackViewLabel.addArrangedSubview(shadowView)
         stackViewLabel.addArrangedSubview(textLabel)
+        
+        stackViewButton.addArrangedSubview(lastButton)
+        stackViewButton.addArrangedSubview(nextButton)
     }
     
 }
@@ -58,17 +81,27 @@ private extension ViewController {
         stackViewLabel.translatesAutoresizingMaskIntoConstraints = false
         stackViewButton.translatesAutoresizingMaskIntoConstraints = false
         shadowView.translatesAutoresizingMaskIntoConstraints = false
-        
+        lastButton.translatesAutoresizingMaskIntoConstraints = false
+        firstButton.translatesAutoresizingMaskIntoConstraints = false
+    
         NSLayoutConstraint.activate([
-            stackViewLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            stackViewLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 50),
             stackViewLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            stackViewLabel.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.7),
+            stackViewLabel.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.6),
             
-            shadowView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 70),
             shadowView.heightAnchor.constraint(equalToConstant: 200),
             shadowView.widthAnchor.constraint(equalToConstant: 200),
             
-            textLabel.widthAnchor.constraint(equalToConstant: 230)
+            textLabel.widthAnchor.constraint(equalToConstant: 250),
+            
+            stackViewButton.bottomAnchor.constraint(equalTo: stackViewLabel.bottomAnchor, constant: 120),
+            stackViewButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            stackViewButton.widthAnchor.constraint(equalToConstant: 250),
+            stackViewButton.heightAnchor.constraint(equalToConstant: 30),
+            
+            firstButton.bottomAnchor.constraint(equalTo: stackViewButton.bottomAnchor, constant: 200),
+            firstButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            firstButton.widthAnchor.constraint(equalToConstant: 100)
         ])
     }
 }
