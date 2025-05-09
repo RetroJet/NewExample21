@@ -22,7 +22,7 @@ class LabelView: UILabel {
         fatalError("init(coder:) has not been implemented")
     }
     
-     func setupLabel() {
+    func setupLabel() {
         text = newText.getCurrentImage().text
         font = .systemFont(ofSize: 15, weight: .regular)
         textAlignment = .left

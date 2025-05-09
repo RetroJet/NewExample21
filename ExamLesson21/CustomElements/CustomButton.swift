@@ -14,7 +14,7 @@ class CustomButton: UIButton {
         super.init(frame: .zero)
         setupButton(titleNormal: titleNormal, titleColor: titleColor, colorButton: colorButton)
         
-    
+        
     }
     
     @available(*, unavailable)

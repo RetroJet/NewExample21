@@ -6,26 +6,18 @@
 	objectVersion = 90;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		78908A6C2DCEA57100E3C03A /* UIView + UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78908A6B2DCEA50500E3C03A /* UIView + UIView.swift */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		786C950C2DC766B800B134B0 /* ExamLesson21.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ExamLesson21.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		78908A6B2DCEA50500E3C03A /* UIView + UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView + UIView.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
-
-/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		786C951E2DC766BA00B134B0 /* Exceptions for "ExamLesson21" folder in "ExamLesson21" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Info.plist,
-			);
-			target = 786C950B2DC766B800B134B0 /* ExamLesson21 */;
-		};
-/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		786C950E2DC766B800B134B0 /* ExamLesson21 */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				786C951E2DC766BA00B134B0 /* Exceptions for "ExamLesson21" folder in "ExamLesson21" target */,
-			);
 			path = ExamLesson21;
 			sourceTree = "<group>";
 		};
@@ -44,17 +36,18 @@
 			isa = PBXGroup;
 			children = (
 				786C950E2DC766B800B134B0 /* ExamLesson21 */,
-				786C950D2DC766B800B134B0 /* Products */,
+				786C950D2DC766B800B134B0 /* Extansions */,
 			);
 			sourceTree = "<group>";
 			usesTabs = 0;
 		};
-		786C950D2DC766B800B134B0 /* Products */ = {
+		786C950D2DC766B800B134B0 /* Extansions */ = {
 			isa = PBXGroup;
 			children = (
 				786C950C2DC766B800B134B0 /* ExamLesson21.app */,
+				78908A6B2DCEA50500E3C03A /* UIView + UIView.swift */,
 			);
-			name = Products;
+			name = Extansions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -103,7 +96,7 @@
 			mainGroup = 786C95032DC766B800B134B0;
 			minimizedProjectReferenceProxies = 1;
 			preferredProjectObjectVersion = 90;
-			productRefGroup = 786C950D2DC766B800B134B0 /* Products */;
+			productRefGroup = 786C950D2DC766B800B134B0 /* Extansions */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -124,6 +117,7 @@
 		786C95082DC766B800B134B0 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			files = (
+				78908A6C2DCEA57100E3C03A /* UIView + UIView.swift in Sources */,
 			);
 		};
 /* End PBXSourcesBuildPhase section */
@@ -138,7 +132,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 79NZFM7X3P;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = ExamLesson21/Info.plist;
+				INFOPLIST_FILE = ExamLesson21/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -166,7 +160,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 79NZFM7X3P;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = ExamLesson21/Info.plist;
+				INFOPLIST_FILE = ExamLesson21/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -238,6 +232,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = ExamLesson21/Resources/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.4;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
@@ -296,6 +291,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = ExamLesson21/Resources/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.4;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;

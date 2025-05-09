@@ -24,7 +24,10 @@ class ShadowView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+}
+
+//MARK: Setup View
+extension ShadowView {
     private func setupView() {
         layer.cornerRadius = 10
         layer.shadowColor = UIColor.black.cgColor
@@ -33,7 +36,7 @@ class ShadowView: UIView {
         layer.shadowRadius = 5
     }
     
-        func setupImage() {
+    func setupImage() {
         let image = newImage.getCurrentImage()
         imageView.image = UIImage(named: image.imageName)
         imageView.contentMode = .scaleAspectFit
@@ -41,8 +44,11 @@ class ShadowView: UIView {
         
         addSubview(imageView)
     }
-    
-    private func setupLayout() {
+}
+
+//MARK: Auto Layout
+private extension ShadowView {
+    func setupLayout() {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         
         imageView.setContentHuggingPriority(.defaultLow, for: .vertical)

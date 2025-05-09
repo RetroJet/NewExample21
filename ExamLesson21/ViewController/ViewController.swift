@@ -38,27 +38,19 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupBackground()
-        view.addSubview(stackViewLabel)
-        view.addSubview(stackViewButton)
-        view.addSubview(firstButton)
+        view.addSubviews(
+            stackViewLabel,
+            stackViewButton,
+            firstButton
+        )
         setupStackView()
         addAction()
-        
-        
         setupLayout()
     }
 }
 
-//MARK: - Nested Types
-enum ShadowViewType: String {
-    case cat1 = "image1"
-    case cat2 = "image2"
-    case cat3 = "image3"
-}
-
-
 //MARK: - Setup View
-extension ViewController {
+private extension ViewController {
     func addAction() {
         let actionLastButton = UIAction { _ in
             _ = self.imageDataManager.getLastImage()
@@ -82,11 +74,11 @@ extension ViewController {
         firstButton.addAction(actionFirstButton, for: .touchUpInside)
     }
     
-    private func setupBackground() {
+    func setupBackground() {
         view.backgroundColor = .white
     }
     
-    private func setupStackView() {
+    func setupStackView() {
         stackViewLabel.axis = .vertical
         stackViewLabel.distribution = .fill
         stackViewLabel.alignment = .center
@@ -97,15 +89,19 @@ extension ViewController {
         stackViewButton.alignment = .fill
         stackViewButton.spacing = 60
         
-        stackViewLabel.addArrangedSubview(shadowView)
-        stackViewLabel.addArrangedSubview(textLabel)
+        stackViewLabel.addArrangedSubviews(
+            shadowView,
+            textLabel
+        )
         
-        stackViewButton.addArrangedSubview(lastButton)
-        stackViewButton.addArrangedSubview(nextButton)
+        stackViewButton.addArrangedSubviews(
+            lastButton,
+            nextButton
+        )
     }
-    
 }
 
+//MARK: Auto Layout
 private extension ViewController {
     func setupLayout() {
         stackViewLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -113,7 +109,6 @@ private extension ViewController {
         shadowView.translatesAutoresizingMaskIntoConstraints = false
         lastButton.translatesAutoresizingMaskIntoConstraints = false
         firstButton.translatesAutoresizingMaskIntoConstraints = false
-
         
         NSLayoutConstraint.activate([
             stackViewLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 50),
@@ -125,7 +120,7 @@ private extension ViewController {
             
             textLabel.widthAnchor.constraint(equalToConstant: 250),
             
-           
+            
             stackViewButton.topAnchor.constraint(equalTo: shadowView.bottomAnchor, constant: 200),
             stackViewButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             stackViewButton.widthAnchor.constraint(equalToConstant: 250),
