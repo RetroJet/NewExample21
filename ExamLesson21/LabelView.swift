@@ -8,10 +8,12 @@
 import UIKit
 
 class LabelView: UILabel {
+    private let newText: ImageDataManager
     
-    init(textName: String){
+    init(newText: ImageDataManager){
+        self.newText = newText
         super.init(frame: .zero)
-        setupLabel(textName)
+        setupLabel()
         
     }
     
@@ -20,8 +22,8 @@ class LabelView: UILabel {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func setupLabel(_ textLabel: String) {
-        text = textLabel
+     func setupLabel() {
+        text = newText.getCurrentImage().text
         font = .systemFont(ofSize: 15, weight: .regular)
         textAlignment = .left
         numberOfLines = 0

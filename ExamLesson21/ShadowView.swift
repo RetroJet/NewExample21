@@ -9,11 +9,13 @@ import UIKit
 
 class ShadowView: UIView {
     private let imageView = UIImageView()
+    private let newImage: ImageDataManager
     
-    init(ImageName: String) {
+    init(newImage: ImageDataManager) {
+        self.newImage = newImage
         super.init(frame: .zero)
         setupView()
-        setupImage(ImageName)
+        setupImage()
         
         setupLayout()
     }
@@ -31,8 +33,9 @@ class ShadowView: UIView {
         layer.shadowRadius = 5
     }
     
-    private func setupImage(_ imageName: String) {
-        imageView.image = UIImage(named: imageName)
+        func setupImage() {
+        let image = newImage.getCurrentImage()
+        imageView.image = UIImage(named: image.imageName)
         imageView.contentMode = .scaleAspectFit
         imageView.layer.masksToBounds = false
         
@@ -41,6 +44,9 @@ class ShadowView: UIView {
     
     private func setupLayout() {
         imageView.translatesAutoresizingMaskIntoConstraints = false
+        
+        imageView.setContentHuggingPriority(.defaultLow, for: .vertical)
+        imageView.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
         
         NSLayoutConstraint.activate([
             imageView.topAnchor.constraint(equalTo: topAnchor),
