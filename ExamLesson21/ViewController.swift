@@ -8,10 +8,15 @@
 import UIKit
 
 class ViewController: UIViewController {
-    private let shadowView = ShadowView(ImageName: ShadowViewType.cat.rawValue)
-    private let textLabel = LabelView(textName: TextData.mainText)
+    private lazy var shadowView = ShadowView(newImage: imageDataManager)
+    private lazy var textLabel = LabelView(newText: imageDataManager)
+    
     private let stackViewLabel = UIStackView()
     private let stackViewButton = UIStackView()
+    
+    private let imageManager = ImageManager().getImages()
+    private lazy var imageDataManager = ImageDataManager(images: imageManager)
+    
     private let lastButton = CustomButton(
         titleNormal: "Last",
         titleColor: .white,
@@ -37,7 +42,7 @@ class ViewController: UIViewController {
         view.addSubview(stackViewButton)
         view.addSubview(firstButton)
         setupStackView()
-        
+        addAction()
         
         
         setupLayout()
@@ -46,12 +51,37 @@ class ViewController: UIViewController {
 
 //MARK: - Nested Types
 enum ShadowViewType: String {
-    case cat = "cat"
+    case cat1 = "image1"
+    case cat2 = "image2"
+    case cat3 = "image3"
 }
 
 
 //MARK: - Setup View
 extension ViewController {
+    func addAction() {
+        let actionLastButton = UIAction { _ in
+            _ = self.imageDataManager.getLastImage()
+            self.shadowView.setupImage()
+            self.textLabel.setupLabel()
+        }
+        
+        let actionNextButton = UIAction { _ in
+            _ = self.imageDataManager.getNextImage()
+            self.shadowView.setupImage()
+            self.textLabel.setupLabel()
+        }
+        
+        let actionFirstButton = UIAction { _ in
+            _ = self.imageDataManager.getFirstImage()
+            self.shadowView.setupImage()
+            self.textLabel.setupLabel()
+        }
+        lastButton.addAction(actionLastButton, for: .touchUpInside)
+        nextButton.addAction(actionNextButton, for: .touchUpInside)
+        firstButton.addAction(actionFirstButton, for: .touchUpInside)
+    }
+    
     private func setupBackground() {
         view.backgroundColor = .white
     }
@@ -83,7 +113,8 @@ private extension ViewController {
         shadowView.translatesAutoresizingMaskIntoConstraints = false
         lastButton.translatesAutoresizingMaskIntoConstraints = false
         firstButton.translatesAutoresizingMaskIntoConstraints = false
-    
+
+        
         NSLayoutConstraint.activate([
             stackViewLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 50),
             stackViewLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -94,7 +125,8 @@ private extension ViewController {
             
             textLabel.widthAnchor.constraint(equalToConstant: 250),
             
-            stackViewButton.bottomAnchor.constraint(equalTo: stackViewLabel.bottomAnchor, constant: 120),
+           
+            stackViewButton.topAnchor.constraint(equalTo: shadowView.bottomAnchor, constant: 200),
             stackViewButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             stackViewButton.widthAnchor.constraint(equalToConstant: 250),
             stackViewButton.heightAnchor.constraint(equalToConstant: 30),
