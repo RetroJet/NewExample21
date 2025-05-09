@@ -6,18 +6,27 @@
 	objectVersion = 90;
 	objects = {
 
-/* Begin PBXBuildFile section */
-		78908A6C2DCEA57100E3C03A /* UIView + UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78908A6B2DCEA50500E3C03A /* UIView + UIView.swift */; };
-/* End PBXBuildFile section */
-
 /* Begin PBXFileReference section */
 		786C950C2DC766B800B134B0 /* ExamLesson21.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ExamLesson21.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		78908A6B2DCEA50500E3C03A /* UIView + UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView + UIView.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		78908AD92DCEAB9C00E3C03A /* Exceptions for "ExamLesson21" folder in "ExamLesson21" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Resources/Info.plist,
+			);
+			target = 786C950B2DC766B800B134B0 /* ExamLesson21 */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		786C950E2DC766B800B134B0 /* ExamLesson21 */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				78908AD92DCEAB9C00E3C03A /* Exceptions for "ExamLesson21" folder in "ExamLesson21" target */,
+			);
 			path = ExamLesson21;
 			sourceTree = "<group>";
 		};
@@ -117,7 +126,6 @@
 		786C95082DC766B800B134B0 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			files = (
-				78908A6C2DCEA57100E3C03A /* UIView + UIView.swift in Sources */,
 			);
 		};
 /* End PBXSourcesBuildPhase section */
