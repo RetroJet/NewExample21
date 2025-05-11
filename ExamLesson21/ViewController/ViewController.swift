@@ -104,11 +104,13 @@ private extension ViewController {
 //MARK: Auto Layout
 private extension ViewController {
     func setupLayout() {
-        stackViewLabel.translatesAutoresizingMaskIntoConstraints = false
-        stackViewButton.translatesAutoresizingMaskIntoConstraints = false
-        shadowView.translatesAutoresizingMaskIntoConstraints = false
-        lastButton.translatesAutoresizingMaskIntoConstraints = false
-        firstButton.translatesAutoresizingMaskIntoConstraints = false
+        disableAutoresizing(views:
+            stackViewLabel,
+            stackViewButton,
+            shadowView,
+            textLabel,
+            firstButton
+        )
         
         NSLayoutConstraint.activate([
             stackViewLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 50),
