@@ -8,16 +8,15 @@
 import UIKit
 
 class ViewController: UIViewController {
-    private let imageManager = ImageManager().getImages()
-    private lazy var imageDataManager = ImageDataManager(images: imageManager)
-    private lazy var currentData = imageDataManager.getCurrentImage()
+    var imageDataManager: DataManager?
+    
+    private lazy var currentData = imageDataManager?.getCurrentImage()
     
     private let stackViewLabel = UIStackView()
     private let stackViewButton = UIStackView()
     
-    private lazy var shadowView = ShadowView(newImage: currentData.imageName)
-    private lazy var textLabel = LabelView(newText: currentData.text)
-    
+    private lazy var shadowView = ShadowView(newImage: currentData?.imageName ?? "")
+    private lazy var textLabel = LabelView(newText: currentData?.text ?? "")
     
     private let lastButton = CustomButton(
         titleNormal: "Last",
@@ -37,6 +36,16 @@ class ViewController: UIViewController {
         colorButton: .systemPink
     )
     
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    }
+    
+    @available(*, unavailable)
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupBackground()
@@ -55,21 +64,21 @@ class ViewController: UIViewController {
 private extension ViewController {
     func addAction() {
         let actionLastButton = UIAction { _ in
-            _ = self.imageDataManager.getLastImage()
-            self.shadowView.updateImage(imageName: self.imageDataManager.getCurrentImage().imageName)
-            self.textLabel.update(text: self.imageDataManager.getCurrentImage().text)
+            _ = self.imageDataManager?.getLastImage()
+            self.shadowView.updateImage(imageName: self.imageDataManager?.getCurrentImage().imageName ?? "")
+            self.textLabel.update(text: self.imageDataManager?.getCurrentImage().text ?? "")
         }
         
         let actionNextButton = UIAction { _ in
-            _ = self.imageDataManager.getNextImage()
-            self.shadowView.updateImage(imageName: self.imageDataManager.getCurrentImage().imageName)
-            self.textLabel.update(text: self.imageDataManager.getCurrentImage().text)
+            _ = self.imageDataManager?.getNextImage()
+            self.shadowView.updateImage(imageName: self.imageDataManager?.getCurrentImage().imageName ?? "")
+            self.textLabel.update(text: self.imageDataManager?.getCurrentImage().text ?? "")
         }
         
         let actionFirstButton = UIAction { _ in
-            _ = self.imageDataManager.getFirstImage()
-            self.shadowView.updateImage(imageName: self.imageDataManager.getCurrentImage().imageName)
-            self.textLabel.update(text: self.imageDataManager.getCurrentImage().text)
+            _ = self.imageDataManager?.getFirstImage()
+            self.shadowView.updateImage(imageName: self.imageDataManager?.getCurrentImage().imageName ?? "")
+            self.textLabel.update(text: self.imageDataManager?.getCurrentImage().text ?? "")
         }
         lastButton.addAction(actionLastButton, for: .touchUpInside)
         nextButton.addAction(actionNextButton, for: .touchUpInside)
