@@ -8,14 +8,16 @@
 import UIKit
 
 class ViewController: UIViewController {
-    private lazy var shadowView = ShadowView(newImage: imageDataManager)
-    private lazy var textLabel = LabelView(newText: imageDataManager)
+    private let imageManager = ImageManager().getImages()
+    private lazy var imageDataManager = ImageDataManager(images: imageManager)
+    private lazy var currentData = imageDataManager.getCurrentImage()
     
     private let stackViewLabel = UIStackView()
     private let stackViewButton = UIStackView()
     
-    private let imageManager = ImageManager().getImages()
-    private lazy var imageDataManager = ImageDataManager(images: imageManager)
+    private lazy var shadowView = ShadowView(newImage: currentData.imageName)
+    private lazy var textLabel = LabelView(newText: currentData.text)
+    
     
     private let lastButton = CustomButton(
         titleNormal: "Last",
@@ -54,20 +56,20 @@ private extension ViewController {
     func addAction() {
         let actionLastButton = UIAction { _ in
             _ = self.imageDataManager.getLastImage()
-            self.shadowView.setupImage()
-            self.textLabel.setupLabel()
+            self.shadowView.updateImage(imageName: self.imageDataManager.getCurrentImage().imageName)
+            self.textLabel.update(text: self.imageDataManager.getCurrentImage().text)
         }
         
         let actionNextButton = UIAction { _ in
             _ = self.imageDataManager.getNextImage()
-            self.shadowView.setupImage()
-            self.textLabel.setupLabel()
+            self.shadowView.updateImage(imageName: self.imageDataManager.getCurrentImage().imageName)
+            self.textLabel.update(text: self.imageDataManager.getCurrentImage().text)
         }
         
         let actionFirstButton = UIAction { _ in
             _ = self.imageDataManager.getFirstImage()
-            self.shadowView.setupImage()
-            self.textLabel.setupLabel()
+            self.shadowView.updateImage(imageName: self.imageDataManager.getCurrentImage().imageName)
+            self.textLabel.update(text: self.imageDataManager.getCurrentImage().text)
         }
         lastButton.addAction(actionLastButton, for: .touchUpInside)
         nextButton.addAction(actionNextButton, for: .touchUpInside)
@@ -104,11 +106,8 @@ private extension ViewController {
 //MARK: Auto Layout
 private extension ViewController {
     func setupLayout() {
-        stackViewLabel.translatesAutoresizingMaskIntoConstraints = false
-        stackViewButton.translatesAutoresizingMaskIntoConstraints = false
-        shadowView.translatesAutoresizingMaskIntoConstraints = false
-        lastButton.translatesAutoresizingMaskIntoConstraints = false
-        firstButton.translatesAutoresizingMaskIntoConstraints = false
+        [stackViewLabel, stackViewButton, shadowView, textLabel, firstButton].forEach { view in view.translatesAutoresizingMaskIntoConstraints = false
+        }
         
         NSLayoutConstraint.activate([
             stackViewLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 50),
