@@ -9,9 +9,9 @@ import UIKit
 
 class ShadowView: UIView {
     private let imageView = UIImageView()
-    private let newImage: ImageDataManager
+    private let newImage: String
     
-    init(newImage: ImageDataManager) {
+    init(newImage: String) {
         self.newImage = newImage
         super.init(frame: .zero)
         setupView()
@@ -28,6 +28,10 @@ class ShadowView: UIView {
 
 //MARK: Setup View
 extension ShadowView {
+    func updateImage(imageName: String) {
+        imageView.image = UIImage(named: imageName)
+    }
+    
     private func setupView() {
         layer.cornerRadius = 10
         layer.shadowColor = UIColor.black.cgColor
@@ -36,9 +40,8 @@ extension ShadowView {
         layer.shadowRadius = 5
     }
     
-    func setupImage() {
-        let image = newImage.getCurrentImage()
-        imageView.image = UIImage(named: image.imageName)
+    private func setupImage() {
+        imageView.image = UIImage(named: newImage)
         imageView.contentMode = .scaleAspectFit
         imageView.layer.masksToBounds = false
         
