@@ -5,7 +5,11 @@
 //  Created by Nazar on 09.05.2025.
 //
 
-class ImageManager{
+protocol Manager {
+    func getImages() -> [ImageModel]
+}
+
+class ImageManager: Manager{
     func getImages() -> [ImageModel] {
         [
             ImageModel(imageName: ShadowViewType.cat1.rawValue, text: TextData.firstImageText),

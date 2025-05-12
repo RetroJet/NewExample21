@@ -5,7 +5,14 @@
 //  Created by Nazar on 09.05.2025.
 //
 
-class ImageDataManager {
+protocol DataManager {
+    func getCurrentImage() -> ImageModel
+    func getLastImage() -> ImageModel
+    func getNextImage() -> ImageModel
+    func getFirstImage() -> ImageModel
+}
+
+class ImageDataManager: DataManager {
     private var images: [ImageModel] = []
     private var currentIndex = 0
     
