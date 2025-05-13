@@ -64,21 +64,21 @@ class ViewController: UIViewController {
 private extension ViewController {
     func addAction() {
         let actionLastButton = UIAction { _ in
-            _ = self.imageDataManager?.getLastImage()
-            self.shadowView.updateImage(imageName: self.imageDataManager?.getCurrentImage().imageName ?? "")
-            self.textLabel.update(text: self.imageDataManager?.getCurrentImage().text ?? "")
+            let imageModel = self.imageDataManager?.getLastImage()
+            self.shadowView.updateImage(imageName: imageModel?.imageName ?? "")
+            self.textLabel.update(text: imageModel?.text ?? "")
         }
         
         let actionNextButton = UIAction { _ in
-            _ = self.imageDataManager?.getNextImage()
-            self.shadowView.updateImage(imageName: self.imageDataManager?.getCurrentImage().imageName ?? "")
-            self.textLabel.update(text: self.imageDataManager?.getCurrentImage().text ?? "")
+            let imageModel = self.imageDataManager?.getNextImage()
+            self.shadowView.updateImage(imageName: imageModel?.imageName ?? "")
+            self.textLabel.update(text: imageModel?.text ?? "")
         }
         
         let actionFirstButton = UIAction { _ in
-            _ = self.imageDataManager?.getFirstImage()
-            self.shadowView.updateImage(imageName: self.imageDataManager?.getCurrentImage().imageName ?? "")
-            self.textLabel.update(text: self.imageDataManager?.getCurrentImage().text ?? "")
+            let imageModel = self.imageDataManager?.getFirstImage()
+            self.shadowView.updateImage(imageName: imageModel?.imageName ?? "")
+            self.textLabel.update(text: imageModel?.text ?? "")
         }
         lastButton.addAction(actionLastButton, for: .touchUpInside)
         nextButton.addAction(actionNextButton, for: .touchUpInside)
@@ -115,7 +115,12 @@ private extension ViewController {
 //MARK: Auto Layout
 private extension ViewController {
     func setupLayout() {
-        [stackViewLabel, stackViewButton, shadowView, textLabel, firstButton].forEach { view in view.translatesAutoresizingMaskIntoConstraints = false
+        [stackViewLabel,
+         stackViewButton,
+         shadowView,
+         textLabel,
+         firstButton].forEach { view in
+            view.translatesAutoresizingMaskIntoConstraints = false
         }
         
         NSLayoutConstraint.activate([

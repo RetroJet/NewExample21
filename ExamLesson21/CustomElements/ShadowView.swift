@@ -9,13 +9,11 @@ import UIKit
 
 class ShadowView: UIView {
     private let imageView = UIImageView()
-    private let newImage: String
     
     init(newImage: String) {
-        self.newImage = newImage
         super.init(frame: .zero)
         setupView()
-        setupImage()
+        setupImage(newImage: newImage)
         
         setupLayout()
     }
@@ -40,7 +38,7 @@ extension ShadowView {
         layer.shadowRadius = 5
     }
     
-    private func setupImage() {
+    private func setupImage(newImage: String) {
         imageView.image = UIImage(named: newImage)
         imageView.contentMode = .scaleAspectFit
         imageView.layer.masksToBounds = false
