@@ -25,7 +25,7 @@ class ImageDataManager: DataManager {
     }
     
     func getLastImage() -> ImageModel {
-        if currentIndex > images.count - 3 {
+        if currentIndex > 0 {
             currentIndex -= 1
         }
         return getCurrentImage()

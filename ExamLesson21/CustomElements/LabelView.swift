@@ -8,12 +8,10 @@
 import UIKit
 
 class LabelView: UILabel {
-    private let newText: String
     
     init(newText: String){
-        self.newText = newText
         super.init(frame: .zero)
-        setupLabel()
+        setupLabel(newText: newText)
     }
     
     @available(*, unavailable)
@@ -27,7 +25,7 @@ extension LabelView {
         self.text = text
     }
     
-    private func setupLabel() {
+    private func setupLabel(newText: String) {
         text = newText
         font = .systemFont(ofSize: 15, weight: .regular)
         textAlignment = .left
