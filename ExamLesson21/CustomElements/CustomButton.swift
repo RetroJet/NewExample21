@@ -6,27 +6,43 @@
 //
 import UIKit
 
+protocol ICustomButtonDelegate {
+    func pressedButton(_ button: UIButton)
+}
+
 class CustomButton: UIButton {
     private var shouldAddShadow: Bool
+    
+    var delegate: ICustomButtonDelegate?
     
     init(titleNormal: String, titleColor: UIColor, colorButton: UIColor, shouldAddShadow: Bool = false){
         self.shouldAddShadow = shouldAddShadow
         super.init(frame: .zero)
         setupButton(titleNormal: titleNormal, titleColor: titleColor, colorButton: colorButton)
-        
+        addAction()
     }
     
     @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         layer.shadowPath = UIBezierPath(roundedRect: bounds, cornerRadius: layer.cornerRadius).cgPath
     }
+}
+
+//MARK: Setup View
+private extension CustomButton {
+    func addAction() {
+        let action = UIAction { _ in
+            self.delegate?.pressedButton(self)
+        }
+        addAction(action, for: .touchUpInside)
+    }
     
-    private func setupButton(titleNormal: String, titleColor: UIColor, colorButton: UIColor) {
+    func setupButton(titleNormal: String, titleColor: UIColor, colorButton: UIColor) {
         setTitle(titleNormal, for: .normal)
         setTitle("", for: .highlighted)
         setTitleColor(titleColor, for: .normal)
