@@ -12,14 +12,16 @@ protocol IDataManager {
     func getFirstImage() -> ImageModel
 }
 
-class ImageDataManager: IDataManager {
+class ImageDataManager {
     private var images: [ImageModel] = []
     private var currentIndex = 0
     
     init(images: [ImageModel]) {
         self.images = images
     }
-    
+}
+
+extension ImageDataManager: IDataManager {
     func getCurrentImage() -> ImageModel {
         images[currentIndex]
     }
