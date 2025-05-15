@@ -8,7 +8,7 @@
 import UIKit
 
 class ViewController: UIViewController {
-    var imageDataManager: DataManager?
+    var imageDataManager: IDataManager?
     
     private lazy var currentData = imageDataManager?.getCurrentImage()
     
@@ -49,40 +49,46 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupBackground()
+        lastButton.delegate = self
+        nextButton.delegate = self
+        firstButton.delegate = self
         view.addSubviews(
             stackViewLabel,
             stackViewButton,
             firstButton
         )
         setupStackView()
-        addAction()
         setupLayout()
+    }
+}
+
+//MARK: - ICustomButtonDelegate
+extension ViewController: ICustomButtonDelegate {
+    func pressedButton(_ button: UIButton) {
+        switch button {
+        case lastButton:
+            let imageModel = imageDataManager?.getLastImage()
+            updateModel(imageModel)
+            print("lastButton pressed")
+        case nextButton:
+            let imageModel = imageDataManager?.getNextImage()
+            updateModel(imageModel)
+            print("nextButton pressed")
+        case firstButton:
+            let imageModel = imageDataManager?.getFirstImage()
+            updateModel(imageModel)
+            print("firstButton pressed")
+        default:
+            break
+        }
     }
 }
 
 //MARK: - Setup View
 private extension ViewController {
-    func addAction() {
-        let actionLastButton = UIAction { _ in
-            let imageModel = self.imageDataManager?.getLastImage()
-            self.shadowView.updateImage(imageName: imageModel?.imageName ?? "")
-            self.textLabel.update(text: imageModel?.text ?? "")
-        }
-        
-        let actionNextButton = UIAction { _ in
-            let imageModel = self.imageDataManager?.getNextImage()
-            self.shadowView.updateImage(imageName: imageModel?.imageName ?? "")
-            self.textLabel.update(text: imageModel?.text ?? "")
-        }
-        
-        let actionFirstButton = UIAction { _ in
-            let imageModel = self.imageDataManager?.getFirstImage()
-            self.shadowView.updateImage(imageName: imageModel?.imageName ?? "")
-            self.textLabel.update(text: imageModel?.text ?? "")
-        }
-        lastButton.addAction(actionLastButton, for: .touchUpInside)
-        nextButton.addAction(actionNextButton, for: .touchUpInside)
-        firstButton.addAction(actionFirstButton, for: .touchUpInside)
+    func updateModel(_ model: ImageModel?) {
+        shadowView.updateImage(imageName: model?.imageName ?? "")
+        textLabel.update(text: model?.text ?? "")
     }
     
     func setupBackground() {
@@ -145,4 +151,3 @@ private extension ViewController {
         ])
     }
 }
-
