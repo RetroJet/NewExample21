@@ -13,6 +13,8 @@ protocol ICustomButtonDelegate {
 class CustomButton: UIButton {
     private var shouldAddShadow: Bool
     
+    var nameButtonInstance: String?
+    
     var delegate: ICustomButtonDelegate?
     
     init(titleNormal: String, titleColor: UIColor, colorButton: UIColor, shouldAddShadow: Bool = false){

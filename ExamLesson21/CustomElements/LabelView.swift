@@ -8,6 +8,7 @@
 import UIKit
 
 class LabelView: UILabel {
+    var nameLabelInstance: String?
     
     init(newText: String){
         super.init(frame: .zero)
