@@ -49,14 +49,43 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupBackground()
-        lastButton.delegate = self
-        nextButton.delegate = self
-        firstButton.delegate = self
+        
+        addDelegate(
+            lastButton,
+            nextButton,
+            firstButton
+        )
+        
+        shadowView.nameShadowInstance = "ShadowView"
+        textLabel.nameLabelInstance = "TextLabel"
+        
+        lastButton.nameButtonInstance = "LastButton"
+        nextButton.nameButtonInstance = "NextButton"
+        firstButton.nameButtonInstance = "FirstButton"
+        
+        let result = view.printAllSubviews(
+            lastButton,
+            nextButton,
+            firstButton,
+            shadowView,
+            textLabel
+        )
+        
+        print(result)
+        
+        view.printNameOfSubviews(
+            lastButton,
+            nextButton,
+            firstButton,
+            shadowView,
+            textLabel)
+        
         view.addSubviews(
             stackViewLabel,
             stackViewButton,
             firstButton
         )
+        
         setupStackView()
         setupLayout()
     }
@@ -69,15 +98,12 @@ extension ViewController: ICustomButtonDelegate {
         case lastButton:
             let imageModel = imageDataManager?.getLastImage()
             updateModel(imageModel)
-            print("lastButton pressed")
         case nextButton:
             let imageModel = imageDataManager?.getNextImage()
             updateModel(imageModel)
-            print("nextButton pressed")
         case firstButton:
             let imageModel = imageDataManager?.getFirstImage()
             updateModel(imageModel)
-            print("firstButton pressed")
         default:
             break
         }

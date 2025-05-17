@@ -10,6 +10,8 @@ import UIKit
 class ShadowView: UIView {
     private let imageView = UIImageView()
     
+    var nameShadowInstance: String?
+    
     init(newImage: String) {
         super.init(frame: .zero)
         setupView()
