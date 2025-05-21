@@ -1,10 +1,4 @@
-//
-//  TextData.swift
-//  ExamLesson21
-//
-//  Created by Nazar on 04.05.2025.
-//
-
+//MARK: -> Text Data
 enum TextData {
     static let firstImageText = """
                                 Neque porro quisquam est qui dolorem ipsum quia dolor sit
@@ -16,6 +10,7 @@ enum TextData {
                                  """
     
     static let thirdImageText = """
-                                Veltroni Quantum Syntaris...
+                                Veltroni åQuantum Syntaris...
                                 """
 }
+

@@ -1,9 +1,3 @@
-//
-//  CustomButtonView.swift
-//  ExamLesson21
-//
-//  Created by Nazar on 05.05.2025.
-//
 import UIKit
 
 protocol ICustomButtonDelegate {
@@ -11,11 +5,10 @@ protocol ICustomButtonDelegate {
 }
 
 class CustomButton: UIButton {
-    private var shouldAddShadow: Bool
-    
     var nameButtonInstance: String?
-    
     var delegate: ICustomButtonDelegate?
+    
+    private var shouldAddShadow: Bool
     
     init(titleNormal: String, titleColor: UIColor, colorButton: UIColor, shouldAddShadow: Bool = false){
         self.shouldAddShadow = shouldAddShadow
@@ -35,7 +28,18 @@ class CustomButton: UIButton {
     }
 }
 
-//MARK: Setup View
+//MARK: -> ICustomButtonDelegate
+extension ICustomButtonDelegate {
+    func addDelegate(_ views: UIView...) {
+        for view in views {
+            if let view = view as? CustomButton {
+                view.delegate = self
+            }
+        }
+    }
+}
+
+//MARK: -> Setup Action
 private extension CustomButton {
     func addAction() {
         let action = UIAction { _ in
@@ -43,7 +47,10 @@ private extension CustomButton {
         }
         addAction(action, for: .touchUpInside)
     }
-    
+}
+
+//MARK: -> Setup Button
+private extension CustomButton {
     func setupButton(titleNormal: String, titleColor: UIColor, colorButton: UIColor) {
         setTitle(titleNormal, for: .normal)
         setTitle("", for: .highlighted)
@@ -60,3 +67,4 @@ private extension CustomButton {
         }
     }
 }
+

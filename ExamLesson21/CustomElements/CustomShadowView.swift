@@ -1,22 +1,14 @@
-//
-//  Untitled.swift
-//  ExamLesson21
-//
-//  Created by Nazar on 04.05.2025.
-//
-
 import UIKit
 
-class ShadowView: UIView {
-    private let imageView = UIImageView()
-    
+class CustomImage: UIView {
     var nameShadowInstance: String?
+    
+    private let imageView = UIImageView()
     
     init(newImage: String) {
         super.init(frame: .zero)
         setupView()
         setupImage(newImage: newImage)
-        
         setupLayout()
     }
     
@@ -26,8 +18,8 @@ class ShadowView: UIView {
     }
 }
 
-//MARK: Setup View
-extension ShadowView {
+//MARK: -> Setup View
+extension CustomImage {
     func updateImage(imageName: String) {
         imageView.image = UIImage(named: imageName)
     }
@@ -49,8 +41,8 @@ extension ShadowView {
     }
 }
 
-//MARK: Auto Layout
-private extension ShadowView {
+//MARK: -> Auto Layout
+private extension CustomImage {
     func setupLayout() {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         

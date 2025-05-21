@@ -1,10 +1,4 @@
-//
-//  ImageData.swift
-//  ExamLesson21
-//
-//  Created by Nazar on 09.05.2025.
-//
-
+//MARK: -> Images Data
 enum ShadowViewType: String {
     case cat1 = "image1"
     case cat2 = "image2"

@@ -1,10 +1,3 @@
-//
-//  ImageDataManager.swift
-//  ExamLesson21
-//
-//  Created by Nazar on 09.05.2025.
-//
-
 protocol IDataManager {
     func getCurrentImage() -> ImageModel
     func getLastImage() -> ImageModel
@@ -21,6 +14,7 @@ class ImageDataManager {
     }
 }
 
+//MARK: -> IDataManager
 extension ImageDataManager: IDataManager {
     func getCurrentImage() -> ImageModel {
         images[currentIndex]
