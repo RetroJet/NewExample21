@@ -5,9 +5,9 @@ protocol IManager {
 class ImageManager: IManager{
     func getImages() -> [ImageModel] {
         [
-            ImageModel(imageName: ShadowViewType.cat1.rawValue, text: TextData.firstImageText),
-            ImageModel(imageName: ShadowViewType.cat2.rawValue, text: TextData.secondImageText),
-            ImageModel(imageName: ShadowViewType.cat3.rawValue, text: TextData.thirdImageText),
+            ImageModel(imageName: ImageViewType.cat1.rawValue, text: TextData.firstImageText),
+            ImageModel(imageName: ImageViewType.cat2.rawValue, text: TextData.secondImageText),
+            ImageModel(imageName: ImageViewType.cat3.rawValue, text: TextData.thirdImageText),
         ]
     }
 }
