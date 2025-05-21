@@ -31,7 +31,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupBackground()
-        addDelagates()
+        addDelegates()
         imageView.nameShadowInstance = "ShadowView"
         textLabel.nameLabelInstance = "TextLabel"
         lastButton.nameButtonInstance = "LastButton"
@@ -43,6 +43,10 @@ class ViewController: UIViewController {
         setupStackView()
         setupLayout()
     }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        textLabel.update(text: imageDataManager?.getCurrentImage().imageName ?? "")
+    }
 }
 
 //MARK: -> ICustomButtonDelegate
@@ -50,14 +54,11 @@ extension ViewController: ICustomButtonDelegate {
     func pressedButton(_ button: UIButton) {
         switch button {
         case lastButton:
-            let imageModel = imageDataManager?.getLastImage()
-            updateModel(imageModel)
+            updateModel(imageDataManager?.getLastImage())
         case nextButton:
-            let imageModel = imageDataManager?.getNextImage()
-            updateModel(imageModel)
+            updateModel(imageDataManager?.getNextImage())
         case firstButton:
-            let imageModel = imageDataManager?.getFirstImage()
-            updateModel(imageModel)
+            updateModel(imageDataManager?.getFirstImage())
         default:
             break
         }
@@ -70,7 +71,7 @@ private extension ViewController {
         view.backgroundColor = .white
     }
     
-    func addDelagates() {
+    func addDelegates() {
         addDelegate(
             lastButton,
             nextButton,

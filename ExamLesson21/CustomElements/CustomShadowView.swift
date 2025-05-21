@@ -7,7 +7,7 @@ class CustomImage: UIView {
     
     init(newImage: String) {
         super.init(frame: .zero)
-        setupView()
+        setupShadow()
         setupImage(newImage: newImage)
         setupLayout()
     }
@@ -23,8 +23,11 @@ extension CustomImage {
     func updateImage(imageName: String) {
         imageView.image = UIImage(named: imageName)
     }
-    
-    private func setupView() {
+}
+
+//MARK: -> Setup Image
+private extension CustomImage {
+    func setupShadow() {
         layer.cornerRadius = 10
         layer.shadowColor = UIColor.black.cgColor
         layer.shadowOpacity = 0.7
@@ -32,7 +35,7 @@ extension CustomImage {
         layer.shadowRadius = 5
     }
     
-    private func setupImage(newImage: String) {
+    func setupImage(newImage: String) {
         imageView.image = UIImage(named: newImage)
         imageView.contentMode = .scaleAspectFit
         imageView.layer.masksToBounds = false

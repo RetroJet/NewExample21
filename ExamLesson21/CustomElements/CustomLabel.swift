@@ -19,9 +19,10 @@ extension CustomLabel {
         self.text = text
     }
 }
+
 //MARK: -> Setup Label
-extension CustomLabel {
-    private func setupLabel(newText: String) {
+private extension CustomLabel {
+    func setupLabel(newText: String) {
         text = newText
         font = .systemFont(ofSize: 15, weight: .regular)
         textAlignment = .left
