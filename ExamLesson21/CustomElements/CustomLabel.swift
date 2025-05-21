@@ -1,13 +1,6 @@
-//
-//  LaibelView.swift
-//  ExamLesson21
-//
-//  Created by Nazar on 04.05.2025.
-//
-
 import UIKit
 
-class LabelView: UILabel {
+class CustomLabel: UILabel {
     var nameLabelInstance: String?
     
     init(newText: String){
@@ -20,12 +13,14 @@ class LabelView: UILabel {
         fatalError("init(coder:) has not been implemented")
     }
 }
-
-extension LabelView {
+//MARK: -> Setup View
+extension CustomLabel {
     func update(text: String) {
         self.text = text
     }
-    
+}
+//MARK: -> Setup Label
+extension CustomLabel {
     private func setupLabel(newText: String) {
         text = newText
         font = .systemFont(ofSize: 15, weight: .regular)

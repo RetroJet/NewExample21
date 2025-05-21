@@ -1,22 +1,14 @@
-//
-//  ViewController.swift
-//  ExamLesson21
-//
-//  Created by Nazar on 04.05.2025.
-//
-
 import UIKit
 
 class ViewController: UIViewController {
     var imageDataManager: IDataManager?
     
-    private lazy var currentData = imageDataManager?.getCurrentImage()
-    
     private let stackViewLabel = UIStackView()
     private let stackViewButton = UIStackView()
     
-    private lazy var shadowView = ShadowView(newImage: currentData?.imageName ?? "")
-    private lazy var textLabel = LabelView(newText: currentData?.text ?? "")
+    private lazy var currentData = imageDataManager?.getCurrentImage()
+    private lazy var imageView = CustomImage(newImage: currentData?.imageName ?? "")
+    private lazy var textLabel = CustomLabel(newText: currentData?.text ?? "")
     
     private let lastButton = CustomButton(
         titleNormal: "Last",
@@ -36,62 +28,24 @@ class ViewController: UIViewController {
         colorButton: .systemPink
     )
     
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-    }
-    
-    @available(*, unavailable)
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupBackground()
-        
-        addDelegate(
-            lastButton,
-            nextButton,
-            firstButton
-        )
-        
-        shadowView.nameShadowInstance = "ShadowView"
+        addDelagates()
+        imageView.nameShadowInstance = "ShadowView"
         textLabel.nameLabelInstance = "TextLabel"
-        
         lastButton.nameButtonInstance = "LastButton"
         nextButton.nameButtonInstance = "NextButton"
         firstButton.nameButtonInstance = "FirstButton"
-        
-        let result = view.printAllSubviews(
-            lastButton,
-            nextButton,
-            firstButton,
-            shadowView,
-            textLabel
-        )
-        
-        print(result)
-        
-        view.printNameOfSubviews(
-            lastButton,
-            nextButton,
-            firstButton,
-            shadowView,
-            textLabel)
-        
-        view.addSubviews(
-            stackViewLabel,
-            stackViewButton,
-            firstButton
-        )
-        
+        printAllSubviews()
+        printNameOfSubview()
+        addAllSubviews()
         setupStackView()
         setupLayout()
     }
 }
 
-//MARK: - ICustomButtonDelegate
+//MARK: -> ICustomButtonDelegate
 extension ViewController: ICustomButtonDelegate {
     func pressedButton(_ button: UIButton) {
         switch button {
@@ -110,17 +64,57 @@ extension ViewController: ICustomButtonDelegate {
     }
 }
 
-//MARK: - Setup View
+//MARK: -> Setup View
 private extension ViewController {
-    func updateModel(_ model: ImageModel?) {
-        shadowView.updateImage(imageName: model?.imageName ?? "")
-        textLabel.update(text: model?.text ?? "")
-    }
-    
     func setupBackground() {
         view.backgroundColor = .white
     }
     
+    func addDelagates() {
+        addDelegate(
+            lastButton,
+            nextButton,
+            firstButton
+        )
+    }
+    
+    func printAllSubviews() {
+        let result = view.printAllSubview(
+            lastButton,
+            nextButton,
+            firstButton,
+            imageView,
+            textLabel
+        )
+        print(result)
+    }
+    
+    func printNameOfSubview() {
+        view.printNameOfSubview(
+            lastButton,
+            nextButton,
+            firstButton,
+            imageView,
+            textLabel
+        )
+    }
+    
+    func addAllSubviews() {
+        view.addSubviews(
+            stackViewLabel,
+            stackViewButton,
+            firstButton
+        )
+    }
+    
+    func updateModel(_ model: ImageModel?) {
+        imageView.updateImage(imageName: model?.imageName ?? "")
+        textLabel.update(text: model?.text ?? "")
+    }
+}
+
+//MARK: -> Setup StackView
+private extension ViewController {
     func setupStackView() {
         stackViewLabel.axis = .vertical
         stackViewLabel.distribution = .fill
@@ -133,7 +127,7 @@ private extension ViewController {
         stackViewButton.spacing = 60
         
         stackViewLabel.addArrangedSubviews(
-            shadowView,
+            imageView,
             textLabel
         )
         
@@ -144,12 +138,12 @@ private extension ViewController {
     }
 }
 
-//MARK: Auto Layout
+//MARK: -> AutoLayout
 private extension ViewController {
     func setupLayout() {
         [stackViewLabel,
          stackViewButton,
-         shadowView,
+         imageView,
          textLabel,
          firstButton].forEach { view in
             view.translatesAutoresizingMaskIntoConstraints = false
@@ -160,13 +154,12 @@ private extension ViewController {
             stackViewLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             stackViewLabel.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.6),
             
-            shadowView.heightAnchor.constraint(equalToConstant: 200),
-            shadowView.widthAnchor.constraint(equalToConstant: 200),
+            imageView.heightAnchor.constraint(equalToConstant: 200),
+            imageView.widthAnchor.constraint(equalToConstant: 200),
             
             textLabel.widthAnchor.constraint(equalToConstant: 250),
             
-            
-            stackViewButton.topAnchor.constraint(equalTo: shadowView.bottomAnchor, constant: 200),
+            stackViewButton.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 200),
             stackViewButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             stackViewButton.widthAnchor.constraint(equalToConstant: 250),
             stackViewButton.heightAnchor.constraint(equalToConstant: 30),
