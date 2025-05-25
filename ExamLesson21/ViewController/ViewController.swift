@@ -8,7 +8,10 @@ class ViewController: UIViewController {
     
     private lazy var currentData = imageDataManager?.getCurrentImage()
     private lazy var imageView = CustomImage(newImage: currentData?.imageName ?? "")
-    private lazy var textLabel = CustomLabel(newText: currentData?.text ?? "")
+    private lazy var textLabel = CustomLabel(
+        newText: currentData?.text ?? "",
+        font: .systemFont(ofSize: 15, weight: .regular)
+    )
     
     private let lastButton = CustomButton(
         titleNormal: "Last",
@@ -31,7 +34,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupBackground()
-        addDelegates()
+        addButtonDelegates()
         imageView.nameShadowInstance = "ShadowView"
         textLabel.nameLabelInstance = "TextLabel"
         lastButton.nameButtonInstance = "LastButton"
@@ -71,8 +74,8 @@ private extension ViewController {
         view.backgroundColor = .white
     }
     
-    func addDelegates() {
-        addDelegate(
+    func addButtonDelegates() {
+        addButtonDelegate(
             lastButton,
             nextButton,
             firstButton

@@ -3,9 +3,9 @@ import UIKit
 class CustomLabel: UILabel {
     var nameLabelInstance: String?
     
-    init(newText: String){
+    init(newText: String, font: UIFont){
         super.init(frame: .zero)
-        setupLabel(newText: newText)
+        setupLabel(newText: newText, font: font)
     }
     
     @available(*, unavailable)
@@ -13,6 +13,7 @@ class CustomLabel: UILabel {
         fatalError("init(coder:) has not been implemented")
     }
 }
+
 //MARK: -> Setup View
 extension CustomLabel {
     func update(text: String) {
@@ -22,11 +23,12 @@ extension CustomLabel {
 
 //MARK: -> Setup Label
 private extension CustomLabel {
-    func setupLabel(newText: String) {
+    func setupLabel(newText: String, font: UIFont) {
         text = newText
-        font = .systemFont(ofSize: 15, weight: .regular)
-        textAlignment = .left
+        self.font = font
+        textAlignment = .center
         numberOfLines = 0
         lineBreakMode = .byWordWrapping
+        isHidden = false
     }
 }

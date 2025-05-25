@@ -30,7 +30,7 @@ class CustomButton: UIButton {
 
 //MARK: -> ICustomButtonDelegate
 extension ICustomButtonDelegate {
-    func addDelegate(_ views: UIView...) {
+    func addButtonDelegate(_ views: UIView...) {
         for view in views {
             if let view = view as? CustomButton {
                 view.delegate = self
