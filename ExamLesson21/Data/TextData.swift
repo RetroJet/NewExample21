@@ -12,5 +12,11 @@ enum TextData {
     static let thirdImageText = """
                                 Veltroni åQuantum Syntaris...
                                 """
+    static let fourthImageText = "Enotio"
 }
 
+enum TextView {
+    static let inputText = "Введите название картинки"
+    static let positiveRespondText = "Такая картинка есть"
+    static let negativeRespondText = "Такой картинки нет"
+}

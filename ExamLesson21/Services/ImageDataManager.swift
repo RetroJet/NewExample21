@@ -3,6 +3,7 @@ protocol IDataManager {
     func getLastImage() -> ImageModel
     func getNextImage() -> ImageModel
     func getFirstImage() -> ImageModel
+    func getNecessaryImage(text: String) -> ImageModel?
 }
 
 class ImageDataManager {
@@ -37,5 +38,14 @@ extension ImageDataManager: IDataManager {
     func getFirstImage() -> ImageModel {
         currentIndex = 0
         return getCurrentImage()
+    }
+    
+    func getNecessaryImage(text: String) -> ImageModel? {
+        for image in images {
+            if image.imageName == text {
+                return image
+            }
+        }
+        return nil
     }
 }

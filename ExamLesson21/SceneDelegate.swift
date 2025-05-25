@@ -12,12 +12,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let sortedImages = imageManager.getImages().sorted(by: <)
         let imageDataManager = ImageDataManager(images: sortedImages)
         let viewController = ViewController()
+        let findImageViewController = FindImageViewController()
         
         iterateImages(images: sortedImages)
         
         viewController.imageDataManager = imageDataManager
+        findImageViewController.imageDataManager = imageDataManager
         
-        window?.rootViewController = viewController
+        window?.rootViewController = findImageViewController
         window?.makeKeyAndVisible()
     }
 }
