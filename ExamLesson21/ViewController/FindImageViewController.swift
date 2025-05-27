@@ -17,9 +17,9 @@ class FindImageViewController: UIViewController {
         colorButton: .white
     )
     
-    private lazy var imageView = CustomImage(newImage: "")
+    private lazy var imageView = CustomImage(newImage: " ")
     private lazy var textLabel = CustomLabel(
-        newText: "",
+        newText: " ",
         font: .systemFont(ofSize: 15, weight: .regular)
     )
     
@@ -41,7 +41,7 @@ class FindImageViewController: UIViewController {
 //MARK: -> ICustomButtonDelegate
 extension FindImageViewController: ICustomButtonDelegate {
     func pressedButton(_ button: UIButton) {
-        updateModel(imageDataManager?.getNecessaryImage(text: mainTextField.text ?? ""))
+        updateModel(imageDataManager?.getNecessaryImage(text: mainTextField.text ?? " "))
         mainTextField.resignFirstResponder()
     }
 }
@@ -49,14 +49,14 @@ extension FindImageViewController: ICustomButtonDelegate {
 //MARK: -> UITextFieldDelegate
 extension FindImageViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        updateModel(imageDataManager?.getNecessaryImage(text: mainTextField.text ?? ""))
+        updateModel(imageDataManager?.getNecessaryImage(text: mainTextField.text ?? " "))
         view.endEditing(true)
         
         return true
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        let model = imageDataManager?.getNecessaryImage(text: mainTextField.text ?? "")
+        let model = imageDataManager?.getNecessaryImage(text: mainTextField.text ?? " ")
         
         if model != nil {
             mainLabel.update(text: TextView.positiveRespondText)
@@ -95,8 +95,8 @@ private extension FindImageViewController {
     }
     
     func updateModel(_ model: ImageModel?) {
-        imageView.updateImage(imageName: model?.imageName ?? "")
-        textLabel.update(text: model?.text ?? "")
+        imageView.updateImage(imageName: model?.imageName ?? " ")
+        textLabel.update(text: model?.text ?? " ")
     }
 }
 
@@ -136,14 +136,14 @@ private extension FindImageViewController {
             mainButton.topAnchor.constraint(equalTo: mainTextField.bottomAnchor, constant: 30),
             mainButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
-            imageView.heightAnchor.constraint(equalToConstant: 200),
-            imageView.widthAnchor.constraint(equalToConstant: 200),
+            imageView.heightAnchor.constraint(lessThanOrEqualTo: stackViewLabel.widthAnchor, multiplier: 0.8),
+            imageView.widthAnchor.constraint(equalTo: imageView.heightAnchor),
             
-            textLabel.widthAnchor.constraint(equalToConstant: 250),
+            textLabel.widthAnchor.constraint(lessThanOrEqualTo: stackViewLabel.widthAnchor),
             
             stackViewLabel.topAnchor.constraint(equalTo: mainButton.bottomAnchor, constant: 50),
             stackViewLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            stackViewLabel.heightAnchor.constraint(equalToConstant: 300),
+            stackViewLabel.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.5),
             stackViewLabel.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.6)
         ])
     }
