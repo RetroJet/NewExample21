@@ -11,16 +11,19 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let imageManager = ImageManager()
         let sortedImages = imageManager.getImages().sorted(by: <)
         let imageDataManager = ImageDataManager(images: sortedImages)
+        let textDataManager = TextDataManager()
         let viewController = ViewController()
         let findImageViewController = FindImageViewController()
-        let panImageViewController = PanImageViewController()
+        _ = PanImageViewController()
+        let licenseAgreementViewController = LicenseAgreementViewController()
         
         iterateImages(images: sortedImages)
         
         viewController.imageDataManager = imageDataManager
         findImageViewController.imageDataManager = imageDataManager
+        licenseAgreementViewController.textDataManager = textDataManager
         
-        window?.rootViewController = panImageViewController
+        window?.rootViewController = licenseAgreementViewController
         window?.makeKeyAndVisible()
     }
 }
