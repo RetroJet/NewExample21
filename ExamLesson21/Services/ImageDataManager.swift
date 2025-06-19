@@ -4,6 +4,9 @@ protocol IDataManager {
     func getNextImage() -> ImageModel
     func getFirstImage() -> ImageModel
     func getNecessaryImage(text: String) -> ImageModel?
+    func getAllImages() -> [ImageModel]
+    func removeImage(index: Int)
+    func toggleMark(index: Int)
 }
 
 class ImageDataManager {
@@ -47,5 +50,19 @@ extension ImageDataManager: IDataManager {
             }
         }
         return nil
+    }
+    
+    func getAllImages() -> [ImageModel] {
+        images
+    }
+    
+    func removeImage(index: Int) {
+        images.remove(at: index)
+    }
+    
+    func toggleMark(index: Int) {
+        if images.indices.contains(index) {
+            images[index].isMark.toggle()
+        }
     }
 }
