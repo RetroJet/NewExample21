@@ -1,6 +1,7 @@
 struct ImageModel {
     let imageName: String
     let text: String
+    var isMark: Bool
 }
 
 //MARK: -> Comparable
