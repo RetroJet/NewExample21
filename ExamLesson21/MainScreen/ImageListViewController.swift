@@ -18,6 +18,10 @@ extension ImageListViewController: UITableViewDelegate {
         100
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
     func tableView(
         _ tableView: UITableView,
         trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath
@@ -46,8 +50,7 @@ extension ImageListViewController: UITableViewDelegate {
         deleteAction.backgroundColor = .systemRed
         markAction.backgroundColor = .systemGreen
         
-        let configuration = UISwipeActionsConfiguration(actions: [deleteAction, markAction])
-        return configuration
+        return UISwipeActionsConfiguration(actions: [deleteAction, markAction])
     }
 }
 

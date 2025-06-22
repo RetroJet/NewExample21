@@ -5,6 +5,7 @@ protocol IDataManager {
     func getFirstImage() -> ImageModel
     func getNecessaryImage(text: String) -> ImageModel?
     func getAllImages() -> [ImageModel]
+    func getMarkedImages() -> [ImageModel]
     func removeImage(index: Int)
     func toggleMark(index: Int)
 }
@@ -54,6 +55,16 @@ extension ImageDataManager: IDataManager {
     
     func getAllImages() -> [ImageModel] {
         images
+    }
+    
+    func getMarkedImages() -> [ImageModel] {
+        var isMarkedImages: [ImageModel] = []
+        for image in images {
+            if image.isMark {
+                isMarkedImages.append(image)
+            }
+        }
+        return isMarkedImages
     }
     
     func removeImage(index: Int) {
