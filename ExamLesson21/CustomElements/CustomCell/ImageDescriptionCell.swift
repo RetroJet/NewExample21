@@ -1,10 +1,13 @@
 import UIKit
 
-class ImageCell: UITableViewCell {
+class ImageDescriptionCell: UITableViewCell {
+    var actionButton: ((UITableViewCell) -> ())?
+    
     private let imageCell = UIImageView()
     private let titleLabel = UILabel()
     private let descriptionLabel = UILabel()
-    private let checkBoxButton = UIButton()
+    private let checkMarkButton = UIButton()
+    private var toggleCheckMark: Bool!
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -20,14 +23,23 @@ class ImageCell: UITableViewCell {
         imageCell.image = UIImage(named: data.imageName)
         titleLabel.text = data.imageName
         descriptionLabel.text = data.text
+        toggleCheckMark = data.isMark
         
-        let checkBox = data.isMark ? "checkmark.square.fill" : "checkmark.square"
-        checkBoxButton.setImage(UIImage(systemName: checkBox), for: .normal)
+        let checkBox = toggleCheckMark ? "checkmark.square.fill" : "checkmark.square"
+        checkMarkButton.setImage(UIImage(systemName: checkBox), for: .normal)
+    }
+    
+    @objc
+    private func toggleCheckMarkCell() {
+        toggleCheckMark.toggle()
+        let checkMark = toggleCheckMark ? "checkmark.square.fill" : "checkmark.square"
+        checkMarkButton.setImage(UIImage(systemName: checkMark), for: .normal )
+        actionButton?(self)
     }
 }
 
 //MARK: -> Setup Views
-private extension ImageCell {
+private extension ImageDescriptionCell {
     func setup() {
         setupCheckBoxButton()
         setupImageProduct()
@@ -42,7 +54,7 @@ private extension ImageCell {
             imageCell,
             titleLabel,
             descriptionLabel,
-            checkBoxButton
+            checkMarkButton
         )
     }
     
@@ -62,22 +74,26 @@ private extension ImageCell {
     }
     
     func setupCheckBoxButton() {
-        checkBoxButton.tintColor = .systemCyan
-        checkBoxButton.contentHorizontalAlignment = .fill
-        checkBoxButton.contentVerticalAlignment = .fill
-        checkBoxButton.widthAnchor.constraint(equalToConstant: 25).isActive = true
-        checkBoxButton.heightAnchor.constraint(equalToConstant: 25).isActive = true
+        checkMarkButton.tintColor = .systemCyan
+        checkMarkButton.contentHorizontalAlignment = .fill
+        checkMarkButton.contentVerticalAlignment = .fill
+        checkMarkButton.imageView?.contentMode = .scaleAspectFill
+        checkMarkButton.clipsToBounds = true
+        checkMarkButton.widthAnchor.constraint(equalToConstant: 25).isActive = true
+        checkMarkButton.heightAnchor.constraint(equalToConstant: 25).isActive = true
+        
+        checkMarkButton.addTarget(self, action: #selector(toggleCheckMarkCell), for: .touchUpInside)
     }
 }
 
 //MARK: -> Auto Layout
-private extension ImageCell {
+private extension ImageDescriptionCell {
     func setupLayout() {
         AutoResizingMask(
             imageCell,
             titleLabel,
             descriptionLabel,
-            checkBoxButton
+            checkMarkButton
         )
         
         NSLayoutConstraint.activate([
@@ -92,8 +108,8 @@ private extension ImageCell {
             descriptionLabel.leadingAnchor.constraint(equalTo: imageCell.trailingAnchor, constant: 16),
             descriptionLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             
-            checkBoxButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            checkBoxButton.centerYAnchor.constraint(equalTo: titleLabel.centerYAnchor)
+            checkMarkButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            checkMarkButton.centerYAnchor.constraint(equalTo: titleLabel.centerYAnchor)
         ])
     }
 }
