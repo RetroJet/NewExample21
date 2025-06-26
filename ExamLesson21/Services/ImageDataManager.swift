@@ -8,6 +8,7 @@ protocol IDataManager {
     func getMarkedImages() -> [ImageModel]
     func removeImage(index: Int)
     func toggleMark(index: Int)
+    func toggleCheckMarker(_ image: ImageModel)
 }
 
 class ImageDataManager {
@@ -73,6 +74,12 @@ extension ImageDataManager: IDataManager {
     
     func toggleMark(index: Int) {
         if images.indices.contains(index) {
+            images[index].isMark.toggle()
+        }
+    }
+    
+    func toggleCheckMarker(_ image: ImageModel) {
+        if let index = images.firstIndex(of: image) {
             images[index].isMark.toggle()
         }
     }

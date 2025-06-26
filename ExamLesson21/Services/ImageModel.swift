@@ -4,6 +4,9 @@ struct ImageModel {
     var isMark: Bool
 }
 
+//MARK: -> Equatable
+extension ImageModel: Equatable {}
+
 //MARK: -> Comparable
 extension ImageModel: Comparable {
     static func < (lhs: ImageModel, rhs: ImageModel) -> Bool {
