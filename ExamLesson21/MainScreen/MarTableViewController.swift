@@ -7,7 +7,10 @@ class MarTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setup()
+        tableView.separatorStyle = .none
         tableView.register(ImageDescriptionCell.self, forCellReuseIdentifier: identifier)
+        
     }
     
     //MARK: -> UITableViewDelegate
@@ -20,6 +23,7 @@ class MarTableViewController: UITableViewController {
         imageDataManager.getMarkedImages().count
     }
     
+    //MARK: -> UITableViewCell
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(
             withIdentifier: identifier,
@@ -38,5 +42,16 @@ class MarTableViewController: UITableViewController {
         }
         
         return cell
+    }
+}
+
+//MARK: -> Setup TableViews
+private extension MarTableViewController {
+    func setup() {
+        setupBackgroundColor()
+    }
+    
+    func setupBackgroundColor() {
+        tableView.backgroundColor = .darkGray
     }
 }
