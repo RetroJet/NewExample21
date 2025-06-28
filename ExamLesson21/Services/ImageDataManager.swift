@@ -1,3 +1,5 @@
+import Foundation
+
 protocol IDataManager {
     func getCurrentImage() -> ImageModel
     func getLastImage() -> ImageModel
@@ -6,7 +8,9 @@ protocol IDataManager {
     func getNecessaryImage(text: String) -> ImageModel?
     func getAllImages() -> [ImageModel]
     func getMarkedImages() -> [ImageModel]
+    func saveStatusImages(_ image: ImageModel)
     func removeImage(index: Int)
+    func loadImageMarks()
     func toggleMark(index: Int)
     func toggleCheckMarker(_ image: ImageModel)
 }
@@ -17,6 +21,7 @@ class ImageDataManager {
     
     init(images: [ImageModel]) {
         self.images = images
+        loadImageMarks()
     }
 }
 
@@ -68,8 +73,22 @@ extension ImageDataManager: IDataManager {
         return isMarkedImages
     }
     
+    func saveStatusImages(_ image: ImageModel) {
+        let key = "\(image.imageName)"
+        UserDefaults.standard.set(image.isMark, forKey: key)
+    }
+    
     func removeImage(index: Int) {
         images.remove(at: index)
+    }
+    
+    func loadImageMarks() {
+        for i in 0..<images.count {
+            let key = "\(images[i].imageName)"
+            if let saved = UserDefaults.standard.value(forKey: key) as? Bool {
+                images[i].isMark = saved
+            }
+        }
     }
     
     func toggleMark(index: Int) {
@@ -81,6 +100,7 @@ extension ImageDataManager: IDataManager {
     func toggleCheckMarker(_ image: ImageModel) {
         if let index = images.firstIndex(of: image) {
             images[index].isMark.toggle()
+            saveStatusImages(images[index])
         }
     }
 }
